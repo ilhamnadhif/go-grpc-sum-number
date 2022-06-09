@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	"go-grpc-sum-number/proto"
+	"go-grpc-sum-number/calculator"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"log"
@@ -15,11 +15,11 @@ func main() {
 	}
 	defer conn.Close()
 
-	client := proto.NewCalculatorClient(conn)
+	client := calculator.NewCalculatorServiceClient(conn)
 
 	ctx := context.Background()
 
-	result1, err := client.Sum(ctx, &proto.CalculatorRequest{
+	result1, err := client.Sum(ctx, &calculator.SumRequest{
 		Number1: 6,
 		Number2: 4,
 	})
@@ -27,7 +27,7 @@ func main() {
 		log.Fatalln(err)
 	}
 	log.Println(result1)
-	result2, err := client.Sum(ctx, &proto.CalculatorRequest{
+	result2, err := client.Sum(ctx, &calculator.SumRequest{
 		Number1: 7,
 		Number2: 13,
 	})
@@ -35,4 +35,12 @@ func main() {
 		log.Fatalln(err)
 	}
 	log.Println(result2)
+	result3, err := client.DevidedBy(ctx, &calculator.DevidedByRequest{
+		Number1: 20,
+		Number2: 4,
+	})
+	if err != nil {
+		log.Fatalln(err)
+	}
+	log.Println(result3)
 }

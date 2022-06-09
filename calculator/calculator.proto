@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package calculator;
+
+option go_package = "go-grpc-sum-number/calculator";
+
+import "sum.proto";
+import "devide.proto";
+
+service CalculatorService {
+  rpc Sum(SumRequest) returns (SumResponse);
+  rpc DevidedBy(DevidedByRequest) returns (DevidedByResponse);
+}
