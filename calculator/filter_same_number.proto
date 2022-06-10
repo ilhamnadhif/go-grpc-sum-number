@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package calculator;
+
+option go_package = "go-grpc-sum-number/calculator";
+
+message FilterSumNumberRequest {
+  int32 number = 1;
+}
+
+
+message FilterSumNumberResponse {
+  int32 number = 1;
+}
